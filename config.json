@@ -8,6 +8,7 @@
     },
     "aws_access_key_id": "123131231231232131",
     "aws_secret_access_key": "123123131313131232131",
+    "aws_access_token": "adfds",
     "unload_options": [
     	"ADDQUOTES",
     	"PARALLEL OFF",

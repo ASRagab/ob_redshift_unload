@@ -53,11 +53,19 @@ def run(config, tablename, file_path, schema_name=None, sql_file=None, range_col
         (SELECT 2 as rn, {2} 
         FROM {3}{4} {5})) ORDER BY rn\')  
     TO \'{8}\'
-    CREDENTIALS 'aws_access_key_id={6};aws_secret_access_key={7}'
+    CREDENTIALS 'aws_access_key_id={6};aws_secret_access_key={7};token={10}'
     {9}
-    """.format(column_str, header_str, cast_columns_str, '{}.'.format(schema_name) if schema_name else '', tablename, 
-               where_clause, config['aws_access_key_id'], 
-               config['aws_secret_access_key'], file_path, unload_options)
+    """.format(column_str, 
+            header_str, 
+            cast_columns_str, 
+            '{}.'.format(schema_name) if schema_name else '', 
+            tablename, 
+            where_clause, 
+            config['aws_access_key_id'], 
+            config['aws_secret_access_key'], 
+            file_path, 
+            unload_options, 
+            config['aws_access_token'])
     print "The following UNLOAD query is being run: \n" + query    
     cursor.execute(query)
     print 'Completed write to {}'.format(file_path)
